@@ -1,0 +1,5 @@
+.idea/
+*_debug.go
+debug/
+build/
+*.exe
