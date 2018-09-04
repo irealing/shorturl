@@ -30,7 +30,7 @@ func (sa *ShortedAPI) shorted(ctx iris.Context) {
 }
 func (sa *ShortedAPI) create(ctx iris.Context) {
 	form := new(NewShorted)
-	if err := ctx.ReadJSON(form); err != nil && form.Validate() != nil {
+	if err := ctx.ReadJSON(form); err != nil || form.Validate() != nil {
 		ctx.JSON(&BaseRet{ErrNo: 400, Msg: "failed"})
 		return
 	}
