@@ -6,12 +6,12 @@ import (
 )
 
 func main() {
-	api, err := NewShortedAPI("data")
+	api, err := NewShortedAPI(ap.Data)
 	if err != nil {
 		log.Fatal(err)
 	}
 	app := iris.Default()
 	app.Get("/{shorted:string regexp(^[a-zA-Z0-9]{2,6}$)}", api.shorted)
 	app.Post("/", api.create)
-	app.Run(iris.Addr("127.0.0.1:8001"))
+	app.Run(iris.Addr(ap.Address()))
 }
