@@ -13,15 +13,15 @@ const (
 )
 
 type URLHash struct {
-	Hash     uint32
-	Fragment uint32
-	Value    uint32
-	Index    uint32
+	Hash     uint32 `json:"hash"`
+	Fragment uint32 `json:"fragment"`
+	Value    uint32 `json:"value"`
+	Index    uint32 `json:"index"`
 }
 type ShortedURL struct {
-	URL     string
-	Hash    *URLHash
-	Shorted string
+	URL     string   `json:"url"`
+	Hash    *URLHash `json:"hash"`
+	Shorted string   `json:"shorted"`
 }
 
 func (su *ShortedURL) ReMake() {
