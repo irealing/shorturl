@@ -5,6 +5,12 @@ import (
 	"github.com/kataras/iris"
 )
 
+type BaseRet struct {
+	ErrNo int         `json:"err_no"`
+	Msg   string      `json:"msg"`
+	Data  interface{} `json:"data"`
+}
+
 type ShortedAPI struct {
 	handler *shorturl.ShortedHandler
 }
@@ -23,6 +29,18 @@ func (sa *ShortedAPI) shorted(ctx iris.Context) {
 	}
 }
 func (sa *ShortedAPI) create(ctx iris.Context) {
+	form := new(NewShorted)
+	if err := ctx.ReadJSON(form); err != nil && form.Validate() != nil {
+		ctx.JSON(&BaseRet{ErrNo: 400, Msg: "failed"})
+		return
+	}
+	var ret *BaseRet
+	if su, err := sa.handler.Create(form.URL); err != nil {
+		ret = &BaseRet{ErrNo: 500, Msg: "failed"}
+	} else {
+		ret = &BaseRet{ErrNo: 0, Msg: "success", Data: su.Shorted}
+	}
+	ctx.JSON(ret)
 }
 func NewShortedAPI(fp string) (*ShortedAPI, error) {
 	handler, err := shorturl.NewHandler(fp)

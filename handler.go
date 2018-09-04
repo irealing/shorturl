@@ -78,7 +78,7 @@ func (sh *ShortedHandler) Find(s string) (*ShortedURL, error) {
 func (sh *ShortedHandler) queryByURL(url string) (*ShortedURL, error) {
 	if r, err := sh.db.Get(sh.indexKey(url), nil); err == nil {
 		ret := &ShortedURL{Hash: &URLHash{}}
-		err = json.Unmarshal(r, &ShortedURL{})
+		err = json.Unmarshal(r, ret)
 		return ret, err
 	} else {
 		return nil, err
