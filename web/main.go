@@ -12,6 +12,6 @@ func main() {
 	}
 	app := iris.Default()
 	app.Get("/{shorted:string regexp(^[a-zA-Z0-9]{2,6}$)}", api.shorted)
-	app.Post("/", api.create)
+	app.Post("/s", api.create)
 	app.Run(iris.Addr(ap.Address()))
 }
