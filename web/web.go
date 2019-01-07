@@ -3,6 +3,7 @@ package main
 import (
 	"shorturl"
 	"github.com/kataras/iris"
+	"fmt"
 )
 
 type BaseRet struct {
@@ -39,6 +40,20 @@ func (sa *ShortedAPI) create(ctx iris.Context) {
 		ret = &BaseRet{ErrNo: 500, Msg: "failed"}
 	} else {
 		ret = &BaseRet{ErrNo: 0, Msg: "success", Data: su.Shorted}
+	}
+	ctx.JSON(ret)
+}
+func (sa *ShortedAPI) query(ctx iris.Context) {
+	shorted := ctx.Params().Get("shorted")
+	if shorted == "" {
+		ctx.StatusCode(iris.StatusNotFound)
+		return
+	}
+	var ret *BaseRet
+	if r, err := sa.handler.Find(shorted); err == nil {
+		ret = &BaseRet{ErrNo: 0, Msg: "success", Data: r.URL}
+	} else {
+		ret = &BaseRet{ErrNo: iris.StatusNotFound, Msg: fmt.Sprintf("%v", err)}
 	}
 	ctx.JSON(ret)
 }
