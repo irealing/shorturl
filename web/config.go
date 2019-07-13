@@ -1,10 +1,11 @@
 package main
 
 import (
-	"fmt"
-	"github.com/irealing/argsparser"
-	"log"
 	"errors"
+	"fmt"
+	"log"
+
+	"github.com/irealing/argsparser"
 )
 
 var ap = &AppConfig{}
