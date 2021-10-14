@@ -3,8 +3,9 @@ package main
 import (
 	"shorturl"
 
-	"github.com/kataras/iris"
 	"fmt"
+
+	iris "github.com/kataras/iris/v12"
 )
 
 type BaseRet struct {
@@ -58,6 +59,7 @@ func (sa *ShortedAPI) query(ctx iris.Context) {
 	}
 	ctx.JSON(ret)
 }
+
 func NewShortedAPI(fp string) (*ShortedAPI, error) {
 	handler, err := shorturl.NewHandler(fp)
 	if err != nil {

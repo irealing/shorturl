@@ -19,9 +19,9 @@ func MurmurHash2(data []byte, seed uint32) uint32 {
 	}
 	switch len(buf) {
 	case 3:
-		h ^= uint32(buf[2] << 16)
+		h ^= uint32(buf[2]) << 16
 	case 2:
-		h ^= uint32(buf[1] << 8)
+		h ^= uint32(buf[1]) << 8
 	case 1:
 		h ^= uint32(buf[0])
 		h *= magicNumber

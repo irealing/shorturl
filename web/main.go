@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/kataras/iris"
+	iris "github.com/kataras/iris/v12"
 )
 
 func main() {
