@@ -34,3 +34,10 @@ $ curl -X GET vvia.xyz/s/orv2oe
 
 {"err_no":0,"msg":"success","data":"https://github.com/irealing/shorturl"}
 ```
+
+## 使用 Docker 镜像
+
+```shell
+docker run -d --name shorturl --restart=unless-stopped -p 80:80 -v $PWD:/data irealing/shorturl:0.1
+```
+
